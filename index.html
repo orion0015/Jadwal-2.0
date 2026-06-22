@@ -17,7 +17,7 @@
       font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
       background: #f5f5f0;
       color: #1a1a1a;
-      padding: 20px 16px 40px;
+      padding: 20px 16px 60px;
       max-width: 640px;
       margin: 0 auto;
     }
@@ -25,133 +25,88 @@
     h1 { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
     .subtitle { font-size: 13px; color: #888; margin-bottom: 18px; }
 
-    /* Notif banner */
-    #notif-banner {
-      background: #fffbeb;
-      border: 1px solid #fcd34d;
+    /* ── TAB NAV ──────────────────────────────────────── */
+    .main-tabs {
+      display: flex; gap: 4px;
+      background: #e8e8e3;
       border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      display: none;
+      padding: 4px;
+      margin-bottom: 18px;
+    }
+    .main-tab {
+      flex: 1; padding: 8px 4px;
+      border: none; border-radius: 9px;
+      font-size: 12px; font-weight: 600;
+      cursor: pointer; color: #888;
+      background: transparent; transition: all 0.2s;
+    }
+    .main-tab.active { background: #fff; color: #1a1a1a; box-shadow: 0 1px 4px rgba(0,0,0,.1); }
+
+    /* ── PANEL ────────────────────────────────────────── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── Notif banner ─────────────────────────────────── */
+    #notif-banner {
+      background: #fffbeb; border: 1px solid #fcd34d;
+      border-radius: 12px; padding: 12px 14px;
+      margin-bottom: 16px; display: none;
     }
     #notif-banner.show { display: block; }
     #notif-banner p { font-size: 13px; color: #92400e; margin-bottom: 8px; }
     #notif-banner button {
-      background: #1a1a1a;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 16px;
-      font-size: 13px;
-      cursor: pointer;
-      margin-right: 8px;
+      background: #1a1a1a; color: #fff; border: none;
+      border-radius: 8px; padding: 7px 16px; font-size: 13px;
+      cursor: pointer; margin-right: 8px;
     }
-    #notif-banner .skip {
-      background: none;
-      color: #aaa;
-      border: 1px solid #e0e0e0;
-    }
+    #notif-banner .skip { background: none; color: #aaa; border: 1px solid #e0e0e0; }
 
-    /* Install banner */
+    /* ── Install banner ───────────────────────────────── */
     #install-banner {
-      background: #f0fdf4;
-      border: 1px solid #86efac;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 16px;
-      display: none;
+      background: #f0fdf4; border: 1px solid #86efac;
+      border-radius: 12px; padding: 12px 14px;
+      margin-bottom: 16px; display: none;
     }
     #install-banner.show { display: block; }
     #install-banner p { font-size: 13px; color: #166534; margin-bottom: 8px; }
     #install-banner button {
-      background: #16a34a;
-      color: #fff;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 16px;
-      font-size: 13px;
-      cursor: pointer;
-      margin-right: 8px;
+      background: #16a34a; color: #fff; border: none;
+      border-radius: 8px; padding: 7px 16px; font-size: 13px;
+      cursor: pointer; margin-right: 8px;
     }
-    #install-banner .skip {
-      background: none;
-      color: #aaa;
-      border: 1px solid #e0e0e0;
-    }
+    #install-banner .skip { background: none; color: #aaa; border: 1px solid #e0e0e0; }
 
-    /* Day tabs */
-    .days-wrap {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
+    /* ── Day tabs ─────────────────────────────────────── */
+    .days-wrap { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
     .day-btn {
-      padding: 7px 13px;
-      border-radius: 20px;
-      border: 1px solid #e0e0e0;
-      background: #fff;
-      font-size: 13px;
-      font-weight: 500;
-      color: #666;
-      cursor: pointer;
-      transition: all 0.15s;
-      position: relative;
+      padding: 7px 13px; border-radius: 20px;
+      border: 1px solid #e0e0e0; background: #fff;
+      font-size: 13px; font-weight: 500; color: #666;
+      cursor: pointer; transition: all 0.15s; position: relative;
     }
-
     .day-btn:hover { border-color: #bbb; }
     .day-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
-
     .progress-dot {
-      position: absolute;
-      top: -3px; right: -3px;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-      border: 1.5px solid #f5f5f0;
-      display: none;
+      position: absolute; top: -3px; right: -3px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #22c55e; border: 1.5px solid #f5f5f0; display: none;
     }
     .day-btn.has-progress .progress-dot { display: block; }
-
     .today-badge {
-      display: inline-block;
-      font-size: 10px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      border-radius: 5px;
-      padding: 1px 5px;
-      margin-left: 4px;
-      font-weight: 600;
+      display: inline-block; font-size: 10px;
+      background: #dbeafe; color: #1d4ed8;
+      border-radius: 5px; padding: 1px 5px;
+      margin-left: 4px; font-weight: 600;
     }
 
-    /* Stats */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .stat {
-      background: #fff;
-      border-radius: 10px;
-      border: 1px solid #e5e5e5;
-      padding: 10px;
-      text-align: center;
-    }
-
+    /* ── Stats ────────────────────────────────────────── */
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px; }
+    .stat { background: #fff; border-radius: 10px; border: 1px solid #e5e5e5; padding: 10px; text-align: center; }
     .stat-num { font-size: 20px; font-weight: 600; }
     .stat-lbl { font-size: 11px; color: #888; margin-top: 2px; }
 
-    /* Weekly bars */
-    .week-summary {
-      background: #fff;
-      border: 1px solid #e5e5e5;
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 18px;
-    }
+    /* ── Weekly bars ──────────────────────────────────── */
+    .week-summary { background: #fff; border: 1px solid #e5e5e5; border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; }
     .week-title { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
     .week-bars { display: flex; gap: 6px; align-items: flex-end; height: 52px; }
     .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
@@ -159,49 +114,34 @@
     .bar-fill { width: 100%; background: #1a1a1a; border-radius: 4px; min-height: 2px; transition: height 0.4s; }
     .bar-lbl { font-size: 10px; color: #bbb; font-weight: 500; }
 
-    /* Legend */
+    /* ── Legend ───────────────────────────────────────── */
     .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
     .leg-dot { width: 9px; height: 9px; border-radius: 50%; }
 
-    /* Reset buttons */
+    /* ── Reset buttons ────────────────────────────────── */
     .btn-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
-
-    .reset-btn {
-      font-size: 12px; color: #888;
-      background: none; border: 1px solid #e0e0e0;
-      border-radius: 8px; padding: 5px 12px; cursor: pointer;
-    }
+    .reset-btn { font-size: 12px; color: #888; background: none; border: 1px solid #e0e0e0; border-radius: 8px; padding: 5px 12px; cursor: pointer; }
     .reset-btn:hover { background: #f0f0f0; }
-
-    .reset-all-btn {
-      font-size: 12px; color: #e53e3e;
-      background: none; border: 1px solid #fca5a5;
-      border-radius: 8px; padding: 5px 12px; cursor: pointer;
-    }
+    .reset-all-btn { font-size: 12px; color: #e53e3e; background: none; border: 1px solid #fca5a5; border-radius: 8px; padding: 5px 12px; cursor: pointer; }
     .reset-all-btn:hover { background: #fff5f5; }
 
-    /* Confirm box */
+    /* ── Confirm box ──────────────────────────────────── */
     .confirm-box {
       display: none; align-items: center; gap: 8px;
       background: #fff8f0; border: 1px solid #fcd3a0;
       border-radius: 10px; padding: 10px 12px;
-      font-size: 12px; color: #92400e;
-      width: 100%; margin-bottom: 10px; flex-wrap: wrap;
+      font-size: 12px; color: #92400e; width: 100%; margin-bottom: 10px; flex-wrap: wrap;
     }
     .confirm-box.show { display: flex; }
     .confirm-box span { flex: 1; font-weight: 500; }
     .confirm-yes { background: #e53e3e; color: #fff; border: none; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
     .confirm-no { background: none; color: #888; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
 
-    /* Section label */
-    .section-lbl {
-      font-size: 11px; font-weight: 600; color: #999;
-      text-transform: uppercase; letter-spacing: 0.06em;
-      margin: 14px 0 7px;
-    }
+    /* ── Section label ────────────────────────────────── */
+    .section-lbl { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin: 14px 0 7px; }
 
-    /* Schedule item */
+    /* ── Schedule item ────────────────────────────────── */
     .item {
       display: flex; align-items: flex-start; gap: 10px;
       padding: 11px 13px; border-radius: 12px;
@@ -213,36 +153,226 @@
     .item:active { background: #f9f9f9; }
     .item.done { opacity: 0.4; }
     .item.done .item-title { text-decoration: line-through; color: #aaa; }
-
     .time-col { min-width: 62px; }
     .time { font-size: 13px; font-weight: 600; }
     .dur { font-size: 11px; color: #bbb; margin-top: 1px; }
-
     .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
     .info { flex: 1; }
     .item-title { font-size: 14px; font-weight: 500; line-height: 1.3; }
     .item-sub { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.4; }
-
     .check {
       width: 22px; height: 22px; border-radius: 50%;
-      border: 1.5px solid #ddd;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 12px; margin-top: 1px;
-      color: #fff; font-weight: 700; transition: all 0.15s;
+      border: 1.5px solid #ddd; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; font-size: 12px;
+      margin-top: 1px; color: #fff; font-weight: 700; transition: all 0.15s;
     }
     .item.done .check { background: #22c55e; border-color: #22c55e; }
 
-    /* Dark mode */
+    /* ══════════════════════════════════════════════════
+       POMODORO TIMER
+    ══════════════════════════════════════════════════ */
+    .pomodoro-card {
+      background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 16px; padding: 22px 18px;
+      margin-bottom: 16px; text-align: center;
+    }
+    .pomo-title { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+    .pomo-mode-row { display: flex; gap: 6px; justify-content: center; margin-bottom: 18px; }
+    .pomo-mode-btn {
+      padding: 5px 14px; border-radius: 20px; border: 1px solid #e0e0e0;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      background: #fff; color: #888; transition: all 0.15s;
+    }
+    .pomo-mode-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+    .pomo-clock {
+      font-size: 62px; font-weight: 700; letter-spacing: -2px;
+      color: #1a1a1a; line-height: 1; margin-bottom: 6px;
+      font-variant-numeric: tabular-nums;
+    }
+    .pomo-clock.break { color: #16a34a; }
+    .pomo-status { font-size: 13px; color: #888; margin-bottom: 18px; min-height: 20px; }
+    .pomo-session-count { font-size: 12px; color: #aaa; margin-bottom: 18px; }
+    .pomo-session-dots { display: flex; gap: 5px; justify-content: center; margin-bottom: 18px; }
+    .pomo-dot { width: 10px; height: 10px; border-radius: 50%; background: #e0e0e0; transition: background 0.3s; }
+    .pomo-dot.done { background: #1a1a1a; }
+    .pomo-dot.current { background: #f97316; }
+    .pomo-controls { display: flex; gap: 10px; justify-content: center; align-items: center; }
+    .pomo-btn {
+      padding: 11px 28px; border-radius: 12px; border: none;
+      font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s;
+    }
+    .pomo-btn.primary { background: #1a1a1a; color: #fff; }
+    .pomo-btn.primary:hover { background: #333; }
+    .pomo-btn.secondary { background: none; color: #888; border: 1px solid #e0e0e0; }
+    .pomo-btn.secondary:hover { background: #f5f5f0; }
+    .pomo-ring-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; }
+    .pomo-ring-wrap svg { transform: rotate(-90deg); }
+    .pomo-ring-bg { fill: none; stroke: #f0f0eb; stroke-width: 8; }
+    .pomo-ring-fg { fill: none; stroke: #1a1a1a; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 1s linear; }
+    .pomo-ring-fg.break { stroke: #16a34a; }
+    .pomo-time-in-ring {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      font-size: 26px; font-weight: 700; letter-spacing: -1px;
+      color: #1a1a1a; font-variant-numeric: tabular-nums;
+    }
+    .pomo-time-in-ring.break { color: #16a34a; }
+    .pomo-label { font-size: 12px; color: #888; margin-bottom: 2px; }
+
+    /* ══════════════════════════════════════════════════
+       MOOD & CATATAN HARIAN
+    ══════════════════════════════════════════════════ */
+    .mood-card {
+      background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 16px; padding: 16px 18px; margin-bottom: 16px;
+    }
+    .mood-card-title { font-size: 13px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .mood-day-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .mood-day-label { font-size: 14px; font-weight: 600; }
+    .mood-nav-btn { background: none; border: 1px solid #e0e0e0; border-radius: 8px; padding: 4px 10px; cursor: pointer; font-size: 14px; color: #666; }
+    .mood-emojis { display: flex; gap: 8px; justify-content: center; margin-bottom: 14px; }
+    .mood-emoji-btn {
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid transparent;
+      background: #f5f5f0; font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; flex-shrink: 0;
+    }
+    .mood-emoji-btn:hover { transform: scale(1.1); }
+    .mood-emoji-btn.selected { border-color: #1a1a1a; background: #fff; box-shadow: 0 0 0 3px rgba(26,26,26,0.08); }
+    .mood-emoji-label { font-size: 10px; color: #aaa; text-align: center; margin-top: 3px; }
+    .mood-emojis-wrap { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .mood-emojis-row { display: flex; gap: 8px; justify-content: center; }
+    .mood-note-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .mood-note {
+      width: 100%; border: 1px solid #e5e5e5; border-radius: 10px;
+      padding: 10px 12px; font-size: 13px; resize: none;
+      font-family: inherit; background: #fafafa; color: #1a1a1a;
+      line-height: 1.5; transition: border-color 0.15s; outline: none;
+    }
+    .mood-note:focus { border-color: #aaa; background: #fff; }
+    .mood-save-btn {
+      margin-top: 10px; width: 100%; padding: 10px;
+      background: #1a1a1a; color: #fff; border: none;
+      border-radius: 10px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s;
+    }
+    .mood-save-btn:hover { background: #333; }
+    .mood-saved-badge {
+      display: none; margin-top: 8px; text-align: center;
+      font-size: 12px; color: #16a34a; font-weight: 600;
+    }
+    .mood-saved-badge.show { display: block; }
+    .mood-history { margin-top: 16px; }
+    .mood-hist-title { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+    .mood-hist-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0; border-bottom: 1px solid #f0f0eb;
+    }
+    .mood-hist-row:last-child { border-bottom: none; }
+    .mood-hist-day { font-size: 12px; color: #888; min-width: 50px; }
+    .mood-hist-emoji { font-size: 20px; }
+    .mood-hist-note { font-size: 12px; color: #666; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* ══════════════════════════════════════════════════
+       STATISTIK DETAIL
+    ══════════════════════════════════════════════════ */
+    .stat-detail-card {
+      background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 16px; padding: 16px 18px; margin-bottom: 16px;
+    }
+    .stat-detail-title { font-size: 13px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .stat-overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 18px; }
+    .stat-ov-item { background: #f8f8f5; border-radius: 10px; padding: 12px; }
+    .stat-ov-num { font-size: 24px; font-weight: 700; }
+    .stat-ov-lbl { font-size: 11px; color: #888; margin-top: 2px; }
+    .stat-cat-section { margin-bottom: 14px; }
+    .stat-cat-title { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .stat-cat-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .stat-cat-label { font-size: 13px; font-weight: 500; min-width: 64px; }
+    .stat-cat-bar-bg { flex: 1; background: #f0f0eb; border-radius: 4px; height: 8px; overflow: hidden; }
+    .stat-cat-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+    .stat-cat-pct { font-size: 12px; color: #888; min-width: 36px; text-align: right; }
+    .stat-streak { display: flex; align-items: center; gap: 12px; background: #f8f8f5; border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
+    .stat-streak-num { font-size: 28px; font-weight: 700; }
+    .stat-streak-info { flex: 1; }
+    .stat-streak-lbl { font-size: 13px; font-weight: 600; }
+    .stat-streak-sub { font-size: 11px; color: #888; margin-top: 2px; }
+    .stat-day-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+    .stat-day-cell {
+      aspect-ratio: 1; border-radius: 5px; background: #f0f0eb;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; color: #bbb; font-weight: 600; cursor: default;
+      position: relative;
+    }
+    .stat-day-cell.has-data { background: #1a1a1a; color: #fff; }
+    .stat-day-cell.has-data.partial { background: #d4d4cc; color: #555; }
+    .stat-day-cell-lbl { font-size: 10px; color: #bbb; text-align: center; margin-bottom: 4px; }
+    .stat-day-labels { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin-bottom: 4px; }
+    .mood-week-row { display: flex; gap: 6px; margin-bottom: 14px; }
+    .mood-week-item { flex: 1; text-align: center; }
+    .mood-week-emoji { font-size: 18px; min-height: 22px; }
+    .mood-week-day { font-size: 9px; color: #bbb; margin-top: 2px; }
+
+    /* ══════════════════════════════════════════════════
+       COUNTDOWN TARGET
+    ══════════════════════════════════════════════════ */
+    .countdown-card {
+      background: #fff; border: 1px solid #e5e5e5;
+      border-radius: 16px; padding: 16px 18px; margin-bottom: 16px;
+    }
+    .countdown-title { font-size: 13px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+    .countdown-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+    .countdown-item {
+      border: 1px solid #e5e5e5; border-radius: 12px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 12px; background: #fafaf8;
+      position: relative;
+    }
+    .countdown-emoji { font-size: 24px; flex-shrink: 0; }
+    .countdown-info { flex: 1; }
+    .countdown-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .countdown-date-lbl { font-size: 11px; color: #888; }
+    .countdown-days-box { text-align: right; flex-shrink: 0; }
+    .countdown-days-num { font-size: 26px; font-weight: 700; line-height: 1; }
+    .countdown-days-lbl { font-size: 11px; color: #888; }
+    .countdown-days-num.urgent { color: #e53e3e; }
+    .countdown-days-num.soon { color: #f97316; }
+    .countdown-days-num.ok { color: #16a34a; }
+    .countdown-del-btn {
+      position: absolute; top: 8px; right: 8px;
+      background: none; border: none; color: #ccc;
+      font-size: 14px; cursor: pointer; padding: 2px 6px;
+      border-radius: 4px; line-height: 1;
+    }
+    .countdown-del-btn:hover { color: #e53e3e; background: #fff5f5; }
+    .countdown-add-form { display: flex; flex-direction: column; gap: 8px; }
+    .countdown-add-row { display: flex; gap: 8px; }
+    .countdown-input {
+      flex: 1; border: 1px solid #e5e5e5; border-radius: 10px;
+      padding: 9px 12px; font-size: 13px; font-family: inherit;
+      background: #fafafa; color: #1a1a1a; outline: none;
+      transition: border-color 0.15s;
+    }
+    .countdown-input:focus { border-color: #aaa; background: #fff; }
+    .countdown-input-emoji { width: 54px; text-align: center; font-size: 18px; }
+    .countdown-add-btn {
+      padding: 9px 18px; border-radius: 10px; border: none;
+      background: #1a1a1a; color: #fff; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background 0.15s; white-space: nowrap;
+    }
+    .countdown-add-btn:hover { background: #333; }
+    .countdown-progress-bar { height: 4px; background: #f0f0eb; border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .countdown-progress-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+
+    /* ── Dark mode ────────────────────────────────────── */
     @media (prefers-color-scheme: dark) {
       body { background: #111; color: #f0f0f0; }
-      .stat, .item, .week-summary { background: #1e1e1e; border-color: #2a2a2a; }
+      .stat, .item, .week-summary, .pomodoro-card, .mood-card, .stat-detail-card, .countdown-card, .countdown-item { background: #1e1e1e; border-color: #2a2a2a; }
       .day-btn { background: #1e1e1e; border-color: #2a2a2a; color: #aaa; }
       .day-btn:hover { background: #252525; }
       .day-btn.active { background: #f0f0f0; color: #111; border-color: #f0f0f0; }
       .progress-dot { border-color: #111; }
       .bar-track { background: #2a2a2a; }
       .bar-fill { background: #f0f0f0; }
-      .time, .item-title, .stat-num { color: #f0f0f0; }
+      .time, .item-title, .stat-num, .pomo-clock, .pomo-time-in-ring { color: #f0f0f0; }
       .check { border-color: #444; }
       .reset-btn { color: #888; border-color: #2a2a2a; }
       .reset-btn:hover { background: #222; }
@@ -252,6 +382,29 @@
       #notif-banner p { color: #fde68a; }
       #install-banner { background: #052e16; border-color: #166534; }
       #install-banner p { color: #86efac; }
+      .main-tabs { background: #2a2a2a; }
+      .main-tab.active { background: #1e1e1e; color: #f0f0f0; }
+      .main-tab { color: #666; }
+      .pomo-mode-btn { background: #1e1e1e; border-color: #2a2a2a; color: #888; }
+      .pomo-mode-btn.active { background: #f0f0f0; color: #111; }
+      .pomo-ring-bg { stroke: #2a2a2a; }
+      .pomo-ring-fg { stroke: #f0f0f0; }
+      .mood-note { background: #2a2a2a; border-color: #3a3a3a; color: #f0f0f0; }
+      .mood-note:focus { border-color: #666; background: #222; }
+      .mood-emoji-btn { background: #2a2a2a; }
+      .mood-emoji-btn.selected { border-color: #f0f0f0; background: #1e1e1e; }
+      .mood-hist-row { border-color: #2a2a2a; }
+      .stat-ov-item, .stat-streak { background: #2a2a2a; }
+      .stat-cat-bar-bg, .bar-track { background: #2a2a2a; }
+      .stat-day-cell { background: #2a2a2a; color: #555; }
+      .stat-day-cell.has-data { background: #f0f0f0; color: #111; }
+      .stat-day-cell.has-data.partial { background: #555; color: #aaa; }
+      .countdown-item { background: #242424; }
+      .countdown-input { background: #2a2a2a; border-color: #3a3a3a; color: #f0f0f0; }
+      .countdown-input:focus { border-color: #666; background: #222; }
+      .countdown-progress-bar { background: #2a2a2a; }
+      .pomo-btn.secondary { border-color: #2a2a2a; color: #888; }
+      .pomo-btn.secondary:hover { background: #2a2a2a; }
     }
   </style>
 </head>
@@ -272,234 +425,631 @@
     <button class="skip" onclick="document.getElementById('install-banner').classList.remove('show')">Nanti</button>
   </div>
 
-  <div class="days-wrap" id="days"></div>
-
-  <div class="week-summary">
-    <div class="week-title">Progress minggu ini</div>
-    <div class="week-bars" id="week-bars"></div>
+  <!-- MAIN TABS -->
+  <div class="main-tabs">
+    <button class="main-tab active" onclick="switchTab('jadwal')">📅 Jadwal</button>
+    <button class="main-tab" onclick="switchTab('pomodoro')">🍅 Pomodoro</button>
+    <button class="main-tab" onclick="switchTab('mood')">✍️ Catatan</button>
+    <button class="main-tab" onclick="switchTab('statistik')">📊 Statistik</button>
   </div>
 
-  <div class="stats" id="stats"></div>
-
-  <div class="legend">
-    <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>Sholat</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Coding</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#D4537E"></div>Novel</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#888780"></div>Lainnya</div>
+  <!-- ══ PANEL: JADWAL ══════════════════════════════════════ -->
+  <div id="panel-jadwal" class="panel active">
+    <div class="days-wrap" id="days"></div>
+    <div class="week-summary">
+      <div class="week-title">Progress minggu ini</div>
+      <div class="week-bars" id="week-bars"></div>
+    </div>
+    <div class="stats" id="stats"></div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>Sholat</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Coding</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#D4537E"></div>Novel</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#888780"></div>Lainnya</div>
+    </div>
+    <div id="confirm-day" class="confirm-box">
+      <span>Hapus progress hari ini?</span>
+      <button class="confirm-no" onclick="hideConfirm()">Batal</button>
+      <button class="confirm-yes" onclick="doResetDay()">Ya, hapus</button>
+    </div>
+    <div id="confirm-week" class="confirm-box">
+      <span>Hapus progress semua hari?</span>
+      <button class="confirm-no" onclick="hideConfirm()">Batal</button>
+      <button class="confirm-yes" onclick="doResetWeek()">Ya, hapus</button>
+    </div>
+    <div class="btn-row">
+      <button class="reset-btn" onclick="showConfirm('day')">↺ Reset hari ini</button>
+      <button class="reset-all-btn" onclick="showConfirm('week')">✕ Reset semua</button>
+    </div>
+    <div id="schedule"></div>
   </div>
 
-  <div id="confirm-day" class="confirm-box">
-    <span>Hapus progress hari ini?</span>
-    <button class="confirm-no" onclick="hideConfirm()">Batal</button>
-    <button class="confirm-yes" onclick="doResetDay()">Ya, hapus</button>
-  </div>
-  <div id="confirm-week" class="confirm-box">
-    <span>Hapus progress semua hari?</span>
-    <button class="confirm-no" onclick="hideConfirm()">Batal</button>
-    <button class="confirm-yes" onclick="doResetWeek()">Ya, hapus</button>
+  <!-- ══ PANEL: POMODORO ════════════════════════════════════ -->
+  <div id="panel-pomodoro" class="panel">
+    <div class="pomodoro-card">
+      <div class="pomo-title">Pomodoro Timer</div>
+      <div class="pomo-mode-row">
+        <button class="pomo-mode-btn active" id="btn-focus" onclick="setPomoMode('focus')">🍅 Fokus 25 mnt</button>
+        <button class="pomo-mode-btn" id="btn-short" onclick="setPomoMode('short')">☕ Istirahat 5 mnt</button>
+        <button class="pomo-mode-btn" id="btn-long" onclick="setPomoMode('long')">🛌 Panjang 15 mnt</button>
+      </div>
+      <div class="pomo-ring-wrap">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <circle class="pomo-ring-bg" cx="60" cy="60" r="52"/>
+          <circle class="pomo-ring-fg" id="pomo-ring" cx="60" cy="60" r="52"
+            stroke-dasharray="326.7" stroke-dashoffset="0"/>
+        </svg>
+        <div class="pomo-time-in-ring" id="pomo-ring-time">25:00</div>
+      </div>
+      <div class="pomo-session-dots" id="pomo-dots"></div>
+      <div class="pomo-status" id="pomo-status">Siap memulai sesi fokus 🎯</div>
+      <div class="pomo-controls">
+        <button class="pomo-btn secondary" onclick="pomoReset()">↺ Reset</button>
+        <button class="pomo-btn primary" id="pomo-start-btn" onclick="pomoToggle()">▶ Mulai</button>
+        <button class="pomo-btn secondary" onclick="pomoSkip()">⏭ Skip</button>
+      </div>
+    </div>
+
+    <!-- Countdown Target ada di sini juga -->
+    <div class="countdown-card">
+      <div class="countdown-title">🎯 Countdown Target</div>
+      <div class="countdown-list" id="countdown-list"></div>
+      <div class="countdown-add-form">
+        <div class="countdown-add-row">
+          <input class="countdown-input countdown-input-emoji" id="cd-emoji" type="text" value="📖" maxlength="2" placeholder="📖"/>
+          <input class="countdown-input" id="cd-name" type="text" placeholder="Nama target (e.g. Deadline Novel)" maxlength="40"/>
+        </div>
+        <div class="countdown-add-row">
+          <input class="countdown-input" id="cd-date" type="date"/>
+          <button class="countdown-add-btn" onclick="addCountdown()">+ Tambah</button>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div class="btn-row">
-    <button class="reset-btn" onclick="showConfirm('day')">↺ Reset hari ini</button>
-    <button class="reset-all-btn" onclick="showConfirm('week')">✕ Reset semua</button>
+  <!-- ══ PANEL: MOOD & CATATAN ══════════════════════════════ -->
+  <div id="panel-mood" class="panel">
+    <div class="mood-card">
+      <div class="mood-card-title">Mood & Catatan Harian</div>
+      <div class="mood-day-nav">
+        <button class="mood-nav-btn" onclick="moodNavDay(-1)">‹</button>
+        <div class="mood-day-label" id="mood-day-lbl"></div>
+        <button class="mood-nav-btn" onclick="moodNavDay(1)">›</button>
+      </div>
+      <div style="margin-bottom:8px; font-size:12px; color:#888;">Bagaimana perasaanmu hari ini?</div>
+      <div class="mood-emojis-row" style="margin-bottom:14px">
+        <div class="mood-emojis-wrap"><button class="mood-emoji-btn" data-mood="5" onclick="selectMood(5)">😄</button><div class="mood-emoji-label">Luar biasa</div></div>
+        <div class="mood-emojis-wrap"><button class="mood-emoji-btn" data-mood="4" onclick="selectMood(4)">😊</button><div class="mood-emoji-label">Baik</div></div>
+        <div class="mood-emojis-wrap"><button class="mood-emoji-btn" data-mood="3" onclick="selectMood(3)">😐</button><div class="mood-emoji-label">Biasa</div></div>
+        <div class="mood-emojis-wrap"><button class="mood-emoji-btn" data-mood="2" onclick="selectMood(2)">😕</button><div class="mood-emoji-label">Kurang baik</div></div>
+        <div class="mood-emojis-wrap"><button class="mood-emoji-btn" data-mood="1" onclick="selectMood(1)">😞</button><div class="mood-emoji-label">Buruk</div></div>
+      </div>
+      <div class="mood-note-label">Catatan harian:</div>
+      <textarea class="mood-note" id="mood-note" rows="4" placeholder="Tulis refleksi, pencapaian, atau hal yang ingin kamu ingat hari ini..."></textarea>
+      <button class="mood-save-btn" onclick="saveMoodEntry()">💾 Simpan Catatan</button>
+      <div class="mood-saved-badge" id="mood-saved-badge">✓ Tersimpan!</div>
+    </div>
+
+    <div class="mood-card">
+      <div class="mood-card-title">Riwayat 7 Hari</div>
+      <div class="mood-history" id="mood-history"></div>
+    </div>
   </div>
 
-  <div id="schedule"></div>
+  <!-- ══ PANEL: STATISTIK ═══════════════════════════════════ -->
+  <div id="panel-statistik" class="panel">
+    <div class="stat-detail-card">
+      <div class="stat-detail-title">📊 Statistik Mingguan</div>
+
+      <div class="stat-streak" id="stat-streak-box">
+        <div class="stat-streak-num" id="stat-streak-num">0🔥</div>
+        <div class="stat-streak-info">
+          <div class="stat-streak-lbl">Streak Hari Aktif</div>
+          <div class="stat-streak-sub" id="stat-streak-sub">Ayo mulai streak-mu!</div>
+        </div>
+      </div>
+
+      <div class="stat-overview" id="stat-overview"></div>
+
+      <div class="stat-cat-section">
+        <div class="stat-cat-title">Breakdown per kategori (minggu ini)</div>
+        <div id="stat-cats"></div>
+      </div>
+
+      <div class="stat-cat-title" style="margin-bottom:8px">Mood minggu ini</div>
+      <div class="mood-week-row" id="stat-mood-week"></div>
+
+      <div class="stat-cat-title" style="margin-bottom:8px">Aktivitas per hari</div>
+      <div class="stat-day-labels" id="stat-day-labels"></div>
+      <div class="stat-day-grid" id="stat-day-grid"></div>
+    </div>
+  </div>
 
   <script>
-    // ── Data jadwal ──────────────────────────────────────────────
-    const SCHEDULE = [
-      { section: 'Pagi' },
-      { time:'07.00', dur:'15 mnt', title:'Bangun & sholat Subuh (qadha)', sub:'Jangan lupa berdoa & bersyukur', cat:'sholat', notif:{h:7,m:0} },
-      { time:'07.15', dur:'30 mnt', title:'Sarapan & bersiap', sub:'Makan dulu biar semangat!', cat:'lain' },
-      { time:'07.45', dur:'15 mnt', title:'Review target hari ini', sub:'Tulis 3 hal yang mau dicapai hari ini', cat:'lain' },
+  // ═══════════════════════════════════════════════════════
+  //  DATA JADWAL
+  // ═══════════════════════════════════════════════════════
+  const SCHEDULE = [
+    { section: 'Pagi' },
+    { time:'07.00', dur:'15 mnt', title:'Bangun & sholat Subuh (qadha)', sub:'Jangan lupa berdoa & bersyukur', cat:'sholat', notif:{h:7,m:0} },
+    { time:'07.15', dur:'30 mnt', title:'Sarapan & bersiap', sub:'Makan dulu biar semangat!', cat:'lain' },
+    { time:'07.45', dur:'15 mnt', title:'Review target hari ini', sub:'Tulis 3 hal yang mau dicapai hari ini', cat:'lain' },
 
-      { section: 'Pagi Produktif' },
-      { time:'08.00', dur:'90 mnt', title:'Sesi coding 1', sub:'Lanjut materi freeCodeCamp / VS Code — fokus tanpa HP', cat:'coding', notif:{h:8,m:0} },
-      { time:'09.30', dur:'15 mnt', title:'Istirahat', sub:'Minum air, stretching ringan', cat:'lain' },
-      { time:'09.45', dur:'45 mnt', title:'Nulis novel — sesi 1', sub:'Target: 300–500 kata. Tulis aja dulu, jangan diedit', cat:'novel', notif:{h:9,m:45} },
+    { section: 'Pagi Produktif' },
+    { time:'08.00', dur:'90 mnt', title:'Sesi coding 1', sub:'Lanjut materi freeCodeCamp / VS Code — fokus tanpa HP', cat:'coding', notif:{h:8,m:0} },
+    { time:'09.30', dur:'15 mnt', title:'Istirahat', sub:'Minum air, stretching ringan', cat:'lain' },
+    { time:'09.45', dur:'45 mnt', title:'Nulis novel — sesi 1', sub:'Target: 300–500 kata. Tulis aja dulu, jangan diedit', cat:'novel', notif:{h:9,m:45} },
 
-      { section: 'Siang' },
-      { time:'10.30', dur:'30 mnt', title:'Bebas / scroll media sosial', sub:'Reward kamu untuk 2.5 jam produktif!', cat:'lain' },
-      { time:'11.00', dur:'60 mnt', title:'Sesi coding 2', sub:'Lanjutkan proyek atau buat sesuatu yang baru', cat:'coding', notif:{h:11,m:0} },
-      { time:'12.00', dur:'15 mnt', title:'Sholat Dzuhur', sub:'Tepat waktu ya!', cat:'sholat', notif:{h:12,m:0} },
-      { time:'12.15', dur:'45 mnt', title:'Makan siang & istirahat', sub:'Waktunya recharge energi', cat:'lain' },
+    { section: 'Siang' },
+    { time:'10.30', dur:'30 mnt', title:'Bebas / scroll media sosial', sub:'Reward kamu untuk 2.5 jam produktif!', cat:'lain' },
+    { time:'11.00', dur:'60 mnt', title:'Sesi coding 2', sub:'Lanjutkan proyek atau buat sesuatu yang baru', cat:'coding', notif:{h:11,m:0} },
+    { time:'12.00', dur:'15 mnt', title:'Sholat Dzuhur', sub:'Tepat waktu ya!', cat:'sholat', notif:{h:12,m:0} },
+    { time:'12.15', dur:'45 mnt', title:'Makan siang & istirahat', sub:'Waktunya recharge energi', cat:'lain' },
 
-      { section: 'Sore' },
-      { time:'13.00', dur:'60 mnt', title:'Sesi coding 3 / review materi', sub:'Ulangi materi yang masih bingung', cat:'coding', notif:{h:13,m:0} },
-      { time:'14.00', dur:'60 mnt', title:'Nulis novel — sesi 2', sub:'Lanjutkan cerita, target +300 kata lagi', cat:'novel', notif:{h:14,m:0} },
-      { time:'15.00', dur:'15 mnt', title:'Sholat Ashar', sub:'Jangan ditunda!', cat:'sholat', notif:{h:15,m:0} },
-      { time:'15.15', dur:'45 mnt', title:'Waktu bebas / hobi lain', sub:'Dengerin musik, jalan-jalan, atau istirahat', cat:'lain' },
+    { section: 'Sore' },
+    { time:'13.00', dur:'60 mnt', title:'Sesi coding 3 / review materi', sub:'Ulangi materi yang masih bingung', cat:'coding', notif:{h:13,m:0} },
+    { time:'14.00', dur:'60 mnt', title:'Nulis novel — sesi 2', sub:'Lanjutkan cerita, target +300 kata lagi', cat:'novel', notif:{h:14,m:0} },
+    { time:'15.00', dur:'15 mnt', title:'Sholat Ashar', sub:'Jangan ditunda!', cat:'sholat', notif:{h:15,m:0} },
+    { time:'15.15', dur:'45 mnt', title:'Waktu bebas / hobi lain', sub:'Dengerin musik, jalan-jalan, atau istirahat', cat:'lain' },
 
-      { section: 'Malam' },
-      { time:'18.00', dur:'15 mnt', title:'Sholat Maghrib', sub:'Waktu yang mustajab untuk berdoa', cat:'sholat', notif:{h:18,m:0} },
-      { time:'18.15', dur:'30 mnt', title:'Makan malam', sub:'', cat:'lain' },
-      { time:'19.00', dur:'15 mnt', title:'Sholat Isya', sub:'', cat:'sholat', notif:{h:19,m:0} },
-      { time:'19.15', dur:'45 mnt', title:'Review & refleksi hari ini', sub:'Apa yang dicapai? Apa yang bisa lebih baik?', cat:'lain' },
-      { time:'20.00', dur:'30 mnt', title:'Nulis novel — sesi malam', sub:'Opsional — kalau masih mood', cat:'novel', notif:{h:20,m:0} },
-      { time:'20.30', dur:'', title:'Istirahat & tidur', sub:'Tidur cukup = produktif besok!', cat:'lain' },
-    ];
+    { section: 'Malam' },
+    { time:'18.00', dur:'15 mnt', title:'Sholat Maghrib', sub:'Waktu yang mustajab untuk berdoa', cat:'sholat', notif:{h:18,m:0} },
+    { time:'18.15', dur:'30 mnt', title:'Makan malam', sub:'', cat:'lain' },
+    { time:'19.00', dur:'15 mnt', title:'Sholat Isya', sub:'', cat:'sholat', notif:{h:19,m:0} },
+    { time:'19.15', dur:'45 mnt', title:'Review & refleksi hari ini', sub:'Apa yang dicapai? Apa yang bisa lebih baik?', cat:'lain' },
+    { time:'20.00', dur:'30 mnt', title:'Nulis novel — sesi malam', sub:'Opsional — kalau masih mood', cat:'novel', notif:{h:20,m:0} },
+    { time:'20.30', dur:'', title:'Istirahat & tidur', sub:'Tidur cukup = produktif besok!', cat:'lain' },
+  ];
 
-    const COLORS = { sholat:'#534AB7', coding:'#0F6E56', novel:'#D4537E', lain:'#888780' };
-    const DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
-    const ITEMS = SCHEDULE.filter(s => !s.section);
-    const TOTAL = ITEMS.length;
+  const COLORS = { sholat:'#534AB7', coding:'#0F6E56', novel:'#D4537E', lain:'#888780' };
+  const DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+  const ITEMS = SCHEDULE.filter(s => !s.section);
+  const TOTAL = ITEMS.length;
+  const MOOD_EMOJIS = {1:'😞',2:'😕',3:'😐',4:'😊',5:'😄'};
 
-    const todayJS = new Date().getDay();
-    const todayIdx = todayJS === 0 ? 6 : todayJS - 1;
-    let activeDay = todayIdx;
+  const todayJS = new Date().getDay();
+  const todayIdx = todayJS === 0 ? 6 : todayJS - 1;
+  let activeDay = todayIdx;
 
-    // ── Storage ───────────────────────────────────────────────────
-    function getKey(d) { return 'jadwal-v2-day-' + d; }
-    function getDone(d) { try { return JSON.parse(localStorage.getItem(getKey(d)) || '[]'); } catch(e) { return []; } }
-    function saveDone(d, arr) { localStorage.setItem(getKey(d), JSON.stringify(arr)); }
+  // ═══════════════════════════════════════════════════════
+  //  STORAGE HELPERS
+  // ═══════════════════════════════════════════════════════
+  function getKey(d) { return 'jadwal-v2-day-' + d; }
+  function getDone(d) { try { return JSON.parse(localStorage.getItem(getKey(d)) || '[]'); } catch(e) { return []; } }
+  function saveDone(d, arr) { localStorage.setItem(getKey(d), JSON.stringify(arr)); }
 
-    // ── Notifications ─────────────────────────────────────────────
-    let swReg = null;
+  function getMoodKey(dayOffset) { 
+    const d = new Date(); d.setDate(d.getDate() + dayOffset);
+    return 'mood-' + d.toISOString().slice(0,10);
+  }
+  function getMood(dayOffset) { try { return JSON.parse(localStorage.getItem(getMoodKey(dayOffset)) || 'null'); } catch(e) { return null; } }
+  function saveMood(dayOffset, data) { localStorage.setItem(getMoodKey(dayOffset), JSON.stringify(data)); }
 
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js').then(r => {
-        swReg = r;
-        scheduleNotifications();
-      });
-    }
+  function getCountdowns() { try { return JSON.parse(localStorage.getItem('countdowns') || '[]'); } catch(e) { return []; } }
+  function saveCountdowns(arr) { localStorage.setItem('countdowns', JSON.stringify(arr)); }
 
-    function showNotifBanner() {
-      if (Notification.permission === 'default' && localStorage.getItem('notif-dismissed') !== '1') {
-        document.getElementById('notif-banner').classList.add('show');
+  // ═══════════════════════════════════════════════════════
+  //  TAB SWITCHING
+  // ═══════════════════════════════════════════════════════
+  let activeTab = 'jadwal';
+  function switchTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.main-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    const tabs = ['jadwal','pomodoro','mood','statistik'];
+    document.querySelectorAll('.main-tab')[tabs.indexOf(tab)].classList.add('active');
+    if (tab === 'statistik') renderStatistik();
+    if (tab === 'mood') renderMoodPanel();
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  NOTIFICATIONS
+  // ═══════════════════════════════════════════════════════
+  let swReg = null;
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').then(r => { swReg = r; scheduleNotifications(); });
+  }
+  function showNotifBanner() {
+    if (Notification.permission === 'default' && localStorage.getItem('notif-dismissed') !== '1')
+      document.getElementById('notif-banner').classList.add('show');
+  }
+  function requestNotif() {
+    Notification.permission !== 'granted'
+      ? Notification.requestPermission().then(p => { document.getElementById('notif-banner').classList.remove('show'); if (p === 'granted') scheduleNotifications(); })
+      : document.getElementById('notif-banner').classList.remove('show');
+  }
+  function dismissNotif() { localStorage.setItem('notif-dismissed','1'); document.getElementById('notif-banner').classList.remove('show'); }
+  function scheduleNotifications() {
+    if (Notification.permission !== 'granted' || !swReg) return;
+    const now = new Date();
+    ITEMS.forEach((item, idx) => {
+      if (!item.notif) return;
+      const t = new Date(); t.setHours(item.notif.h, item.notif.m, 0, 0);
+      const ms = t - now;
+      if (ms > 0 && ms < 86400000) {
+        setTimeout(() => {
+          swReg.active && swReg.active.postMessage({ type:'SHOW_NOTIF', title:item.title, body:item.sub||'Waktunya '+item.title+'!', tag:'jadwal-'+idx });
+        }, ms);
       }
-    }
-
-    function requestNotif() {
-      Notification.permission !== 'granted'
-        ? Notification.requestPermission().then(p => {
-            document.getElementById('notif-banner').classList.remove('show');
-            if (p === 'granted') scheduleNotifications();
-          })
-        : document.getElementById('notif-banner').classList.remove('show');
-    }
-
-    function dismissNotif() {
-      localStorage.setItem('notif-dismissed', '1');
-      document.getElementById('notif-banner').classList.remove('show');
-    }
-
-    function scheduleNotifications() {
-      if (Notification.permission !== 'granted' || !swReg) return;
-      const now = new Date();
-      ITEMS.forEach((item, idx) => {
-        if (!item.notif) return;
-        const t = new Date();
-        t.setHours(item.notif.h, item.notif.m, 0, 0);
-        const ms = t - now;
-        if (ms > 0 && ms < 86400000) {
-          setTimeout(() => {
-            if (!swReg) return;
-            swReg.active && swReg.active.postMessage({
-              type: 'SHOW_NOTIF',
-              title: item.title,
-              body: item.sub || 'Waktunya ' + item.title + '!',
-              tag: 'jadwal-' + idx
-            });
-          }, ms);
-        }
-      });
-    }
-
-    // ── PWA Install ───────────────────────────────────────────────
-    let deferredPrompt = null;
-
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault();
-      deferredPrompt = e;
-      document.getElementById('install-banner').classList.add('show');
     });
+  }
 
-    function installApp() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => {
-        deferredPrompt = null;
-        document.getElementById('install-banner').classList.remove('show');
-      });
+  // ═══════════════════════════════════════════════════════
+  //  PWA INSTALL
+  // ═══════════════════════════════════════════════════════
+  let deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('install-banner').classList.add('show'); });
+  function installApp() {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; document.getElementById('install-banner').classList.remove('show'); });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  JADWAL RENDER
+  // ═══════════════════════════════════════════════════════
+  function showConfirm(t) { hideConfirm(); document.getElementById('confirm-'+t).classList.add('show'); }
+  function hideConfirm() { ['day','week'].forEach(t => document.getElementById('confirm-'+t).classList.remove('show')); }
+  function doResetDay() { saveDone(activeDay,[]); hideConfirm(); render(); }
+  function doResetWeek() { DAYS.forEach((_,i) => saveDone(i,[])); hideConfirm(); render(); }
+  function toggle(idx) {
+    let done = getDone(activeDay);
+    const pos = done.indexOf(idx);
+    pos === -1 ? done.push(idx) : done.splice(pos,1);
+    saveDone(activeDay, done); render();
+  }
+
+  function render() {
+    const done = getDone(activeDay);
+    const completed = done.length;
+    const pct = Math.round((completed/TOTAL)*100);
+    const now = new Date();
+    document.getElementById('date-lbl').textContent = now.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+    document.getElementById('days').innerHTML = DAYS.map((d,i) => {
+      const hp = getDone(i).length > 0;
+      return `<button class="day-btn${i===activeDay?' active':''}${hp?' has-progress':''}" onclick="activeDay=${i};render()">
+        ${d}${i===todayIdx?'<span class="today-badge">Hari ini</span>':''}
+        <span class="progress-dot"></span>
+      </button>`;
+    }).join('');
+
+    document.getElementById('week-bars').innerHTML = DAYS.map((d,i) => {
+      const p = Math.round((getDone(i).length/TOTAL)*100);
+      const h = Math.max(2, Math.round(p*0.38));
+      return `<div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="height:${h}px"></div></div><div class="bar-lbl">${d.substring(0,3)}</div></div>`;
+    }).join('');
+
+    document.getElementById('stats').innerHTML = `
+      <div class="stat"><div class="stat-num">${completed}/${TOTAL}</div><div class="stat-lbl">Selesai</div></div>
+      <div class="stat"><div class="stat-num">${pct}%</div><div class="stat-lbl">Progress</div></div>
+      <div class="stat"><div class="stat-num">${TOTAL-completed}</div><div class="stat-lbl">Tersisa</div></div>`;
+
+    let html = '', idx = 0;
+    SCHEDULE.forEach(s => {
+      if (s.section) { html += `<div class="section-lbl">${s.section}</div>`; return; }
+      const i = idx, isDone = done.includes(i);
+      html += `<div class="item${isDone?' done':''}" onclick="toggle(${i})">
+        <div class="time-col"><div class="time">${s.time}</div>${s.dur?`<div class="dur">${s.dur}</div>`:''}</div>
+        <div class="dot" style="background:${COLORS[s.cat]}"></div>
+        <div class="info"><div class="item-title">${s.title}</div>${s.sub?`<div class="item-sub">${s.sub}</div>`:''}</div>
+        <div class="check">${isDone?'✓':''}</div>
+      </div>`;
+      idx++;
+    });
+    document.getElementById('schedule').innerHTML = html;
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  POMODORO TIMER
+  // ═══════════════════════════════════════════════════════
+  const POMO_MODES = { focus: 25*60, short: 5*60, long: 15*60 };
+  let pomoMode = 'focus';
+  let pomoTotal = POMO_MODES.focus;
+  let pomoLeft = pomoTotal;
+  let pomoRunning = false;
+  let pomoInterval = null;
+  let pomoSessions = 0; // completed focus sessions
+  const SESSIONS_BEFORE_LONG = 4;
+
+  function setPomoMode(mode) {
+    if (pomoRunning) pomoStop();
+    pomoMode = mode;
+    pomoTotal = POMO_MODES[mode];
+    pomoLeft = pomoTotal;
+    document.querySelectorAll('.pomo-mode-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('btn-' + mode).classList.add('active');
+    updatePomoDisplay();
+    const isBreak = mode !== 'focus';
+    document.getElementById('pomo-ring').classList.toggle('break', isBreak);
+    document.getElementById('pomo-ring-time').classList.toggle('break', isBreak);
+    const msgs = { focus:'Siap memulai sesi fokus 🎯', short:'Waktunya istirahat sejenak ☕', long:'Istirahat panjang, kamu sudah kerja keras! 🎉' };
+    document.getElementById('pomo-status').textContent = msgs[mode];
+    document.getElementById('pomo-start-btn').textContent = '▶ Mulai';
+  }
+
+  function updatePomoDisplay() {
+    const m = Math.floor(pomoLeft/60), s = pomoLeft%60;
+    const str = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    document.getElementById('pomo-ring-time').textContent = str;
+    const circ = 2*Math.PI*52;
+    const offset = circ * (1 - pomoLeft/pomoTotal);
+    document.getElementById('pomo-ring').style.strokeDashoffset = offset;
+
+    // session dots
+    const dots = [];
+    for (let i=0;i<SESSIONS_BEFORE_LONG;i++) {
+      const isDone = i < pomoSessions % SESSIONS_BEFORE_LONG;
+      const isCurrent = i === pomoSessions % SESSIONS_BEFORE_LONG && pomoMode==='focus' && pomoRunning;
+      dots.push(`<div class="pomo-dot${isDone?' done':''}${isCurrent?' current':''}"></div>`);
     }
+    document.getElementById('pomo-dots').innerHTML = dots.join('');
+  }
 
-    // ── Reset / Confirm ───────────────────────────────────────────
-    function showConfirm(t) { hideConfirm(); document.getElementById('confirm-' + t).classList.add('show'); }
-    function hideConfirm() { ['day','week'].forEach(t => document.getElementById('confirm-' + t).classList.remove('show')); }
-    function doResetDay() { saveDone(activeDay, []); hideConfirm(); render(); }
-    function doResetWeek() { DAYS.forEach((_, i) => saveDone(i, [])); hideConfirm(); render(); }
+  function pomoToggle() {
+    pomoRunning ? pomoStop() : pomoStart();
+  }
 
-    function toggle(idx) {
-      let done = getDone(activeDay);
-      const pos = done.indexOf(idx);
-      pos === -1 ? done.push(idx) : done.splice(pos, 1);
-      saveDone(activeDay, done);
-      render();
+  function pomoStart() {
+    pomoRunning = true;
+    document.getElementById('pomo-start-btn').textContent = '⏸ Pause';
+    const statusMsgs = { focus:'Fokus! Singkirkan semua distraksi 🎯', short:'Istirahat... tarik napas 😌', long:'Istirahat panjang, kamu hebat! ☀️' };
+    document.getElementById('pomo-status').textContent = statusMsgs[pomoMode];
+    pomoInterval = setInterval(() => {
+      pomoLeft--;
+      updatePomoDisplay();
+      if (pomoLeft <= 0) {
+        pomoStop();
+        pomoFinish();
+      }
+    }, 1000);
+  }
+
+  function pomoStop() {
+    pomoRunning = false;
+    clearInterval(pomoInterval);
+    document.getElementById('pomo-start-btn').textContent = '▶ Lanjut';
+  }
+
+  function pomoFinish() {
+    if (pomoMode === 'focus') {
+      pomoSessions++;
+      localStorage.setItem('pomo-sessions-today', pomoSessions);
+      const isLongBreak = pomoSessions % SESSIONS_BEFORE_LONG === 0;
+      document.getElementById('pomo-status').textContent = isLongBreak
+        ? `🎉 ${SESSIONS_BEFORE_LONG} sesi selesai! Ambil istirahat panjang.`
+        : `✅ Sesi ${pomoSessions} selesai! Istirahat dulu.`;
+      // auto switch to break
+      setTimeout(() => setPomoMode(isLongBreak ? 'long' : 'short'), 1000);
+    } else {
+      document.getElementById('pomo-status').textContent = '🍅 Istirahat selesai! Siap fokus lagi?';
+      setTimeout(() => setPomoMode('focus'), 1000);
     }
-
-    // ── Render ────────────────────────────────────────────────────
-    function render() {
-      const done = getDone(activeDay);
-      const completed = done.length;
-      const pct = Math.round((completed / TOTAL) * 100);
-
-      // Date label
-      const now = new Date();
-      document.getElementById('date-lbl').textContent =
-        now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-
-      // Day tabs
-      document.getElementById('days').innerHTML = DAYS.map((d, i) => {
-        const hp = getDone(i).length > 0;
-        return `<button class="day-btn${i===activeDay?' active':''}${hp?' has-progress':''}"
-          onclick="activeDay=${i};render()">
-          ${d}${i===todayIdx?'<span class="today-badge">Hari ini</span>':''}
-          <span class="progress-dot"></span>
-        </button>`;
-      }).join('');
-
-      // Weekly bars
-      document.getElementById('week-bars').innerHTML = DAYS.map((d, i) => {
-        const p = Math.round((getDone(i).length / TOTAL) * 100);
-        const h = Math.max(2, Math.round(p * 0.38));
-        return `<div class="bar-wrap">
-          <div class="bar-track"><div class="bar-fill" style="height:${h}px"></div></div>
-          <div class="bar-lbl">${d.substring(0,3)}</div>
-        </div>`;
-      }).join('');
-
-      // Stats
-      document.getElementById('stats').innerHTML = `
-        <div class="stat"><div class="stat-num">${completed}/${TOTAL}</div><div class="stat-lbl">Selesai</div></div>
-        <div class="stat"><div class="stat-num">${pct}%</div><div class="stat-lbl">Progress</div></div>
-        <div class="stat"><div class="stat-num">${TOTAL - completed}</div><div class="stat-lbl">Tersisa</div></div>`;
-
-      // Schedule
-      let html = '', idx = 0;
-      SCHEDULE.forEach(s => {
-        if (s.section) { html += `<div class="section-lbl">${s.section}</div>`; return; }
-        const i = idx, isDone = done.includes(i);
-        html += `<div class="item${isDone?' done':''}" onclick="toggle(${i})">
-          <div class="time-col">
-            <div class="time">${s.time}</div>
-            ${s.dur ? `<div class="dur">${s.dur}</div>` : ''}
-          </div>
-          <div class="dot" style="background:${COLORS[s.cat]}"></div>
-          <div class="info">
-            <div class="item-title">${s.title}</div>
-            ${s.sub ? `<div class="item-sub">${s.sub}</div>` : ''}
-          </div>
-          <div class="check">${isDone ? '✓' : ''}</div>
-        </div>`;
-        idx++;
-      });
-      document.getElementById('schedule').innerHTML = html;
+    // vibrate
+    if (navigator.vibrate) navigator.vibrate([300,100,300]);
+    // notify
+    if (Notification.permission === 'granted') {
+      const msgs = { focus:'Sesi fokus selesai! Waktunya istirahat.', short:'Istirahat selesai! Ayo fokus lagi 🍅', long:'Istirahat panjang selesai! Siap sprint berikutnya?' };
+      new Notification('Jadwal Harianku ⏰', { body: msgs[pomoMode], icon:'./icon-192.png' });
     }
+  }
 
-    // ── Init ──────────────────────────────────────────────────────
-    render();
-    setTimeout(showNotifBanner, 1500);
+  function pomoReset() {
+    pomoStop();
+    pomoLeft = pomoTotal;
+    updatePomoDisplay();
+    const msgs = { focus:'Siap memulai sesi fokus 🎯', short:'Istirahat singkat', long:'Istirahat panjang' };
+    document.getElementById('pomo-status').textContent = msgs[pomoMode];
+    document.getElementById('pomo-start-btn').textContent = '▶ Mulai';
+  }
+
+  function pomoSkip() {
+    pomoStop();
+    pomoLeft = 0;
+    pomoFinish();
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  COUNTDOWN TARGET
+  // ═══════════════════════════════════════════════════════
+  // Set default date to today + 30
+  (function() {
+    const d = new Date(); d.setDate(d.getDate()+30);
+    document.getElementById('cd-date').value = d.toISOString().slice(0,10);
+    // set min to tomorrow
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+    document.getElementById('cd-date').min = tomorrow.toISOString().slice(0,10);
+  })();
+
+  function addCountdown() {
+    const emoji = document.getElementById('cd-emoji').value.trim() || '📖';
+    const name = document.getElementById('cd-name').value.trim();
+    const date = document.getElementById('cd-date').value;
+    if (!name || !date) { alert('Isi nama dan tanggal target ya!'); return; }
+    const arr = getCountdowns();
+    arr.push({ id: Date.now(), emoji, name, date });
+    saveCountdowns(arr);
+    document.getElementById('cd-name').value = '';
+    renderCountdowns();
+  }
+
+  function deleteCountdown(id) {
+    const arr = getCountdowns().filter(c => c.id !== id);
+    saveCountdowns(arr);
+    renderCountdowns();
+  }
+
+  function renderCountdowns() {
+    const arr = getCountdowns();
+    const today = new Date(); today.setHours(0,0,0,0);
+    if (arr.length === 0) {
+      document.getElementById('countdown-list').innerHTML = '<div style="text-align:center;color:#bbb;font-size:13px;padding:10px 0">Belum ada target. Tambahkan deadline kamu!</div>';
+      return;
+    }
+    document.getElementById('countdown-list').innerHTML = arr.map(c => {
+      const deadline = new Date(c.date); deadline.setHours(0,0,0,0);
+      const days = Math.ceil((deadline - today) / 86400000);
+      const cls = days <= 3 ? 'urgent' : days <= 7 ? 'soon' : 'ok';
+      const label = days < 0 ? 'lewat' : days === 0 ? 'HARI INI!' : 'hari lagi';
+      const numStr = days < 0 ? Math.abs(days) : days;
+      // progress: assume created at 90 days before
+      const created = c.id ? Math.max(1, Math.ceil((deadline - new Date(c.id)) / 86400000)) : 90;
+      const elapsed = created - Math.max(0,days);
+      const pct = Math.min(100, Math.round((elapsed/created)*100));
+      const barColor = days <= 3 ? '#e53e3e' : days <= 7 ? '#f97316' : '#16a34a';
+      return `<div class="countdown-item">
+        <button class="countdown-del-btn" onclick="deleteCountdown(${c.id})">✕</button>
+        <div class="countdown-emoji">${c.emoji}</div>
+        <div class="countdown-info">
+          <div class="countdown-name">${c.name}</div>
+          <div class="countdown-date-lbl">${new Date(c.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}</div>
+          <div class="countdown-progress-bar"><div class="countdown-progress-fill" style="width:${pct}%;background:${barColor}"></div></div>
+        </div>
+        <div class="countdown-days-box">
+          <div class="countdown-days-num ${cls}">${numStr}</div>
+          <div class="countdown-days-lbl">${label}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  MOOD & CATATAN
+  // ═══════════════════════════════════════════════════════
+  let moodDayOffset = 0; // 0=today, -1=yesterday, etc.
+  let currentMoodValue = null;
+
+  function moodNavDay(delta) {
+    moodDayOffset += delta;
+    if (moodDayOffset > 0) moodDayOffset = 0;
+    if (moodDayOffset < -6) moodDayOffset = -6;
+    renderMoodPanel();
+  }
+
+  function selectMood(val) {
+    currentMoodValue = val;
+    document.querySelectorAll('.mood-emoji-btn').forEach(b => {
+      b.classList.toggle('selected', parseInt(b.dataset.mood) === val);
+    });
+  }
+
+  function saveMoodEntry() {
+    const note = document.getElementById('mood-note').value.trim();
+    const existing = getMood(moodDayOffset) || {};
+    saveMood(moodDayOffset, { mood: currentMoodValue || existing.mood || null, note });
+    const badge = document.getElementById('mood-saved-badge');
+    badge.classList.add('show');
+    setTimeout(() => badge.classList.remove('show'), 2000);
+    renderMoodHistory();
+  }
+
+  function renderMoodPanel() {
+    const d = new Date(); d.setDate(d.getDate() + moodDayOffset);
+    const labels = moodDayOffset === 0 ? 'Hari ini' : moodDayOffset === -1 ? 'Kemarin' : d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'short'});
+    document.getElementById('mood-day-lbl').textContent = labels;
+
+    const entry = getMood(moodDayOffset);
+    currentMoodValue = entry ? entry.mood : null;
+    document.getElementById('mood-note').value = entry ? (entry.note || '') : '';
+    document.querySelectorAll('.mood-emoji-btn').forEach(b => {
+      b.classList.toggle('selected', entry && parseInt(b.dataset.mood) === entry.mood);
+    });
+    document.getElementById('mood-saved-badge').classList.remove('show');
+    renderMoodHistory();
+  }
+
+  function renderMoodHistory() {
+    const rows = [];
+    for (let i = 0; i >= -6; i--) {
+      const entry = getMood(i);
+      if (!entry) continue;
+      const d = new Date(); d.setDate(d.getDate() + i);
+      const lbl = i === 0 ? 'Hari ini' : i === -1 ? 'Kemarin' : d.toLocaleDateString('id-ID',{weekday:'short',day:'numeric',month:'short'});
+      const emoji = entry.mood ? MOOD_EMOJIS[entry.mood] : '—';
+      rows.push(`<div class="mood-hist-row">
+        <div class="mood-hist-day">${lbl}</div>
+        <div class="mood-hist-emoji">${emoji}</div>
+        <div class="mood-hist-note">${entry.note || '<span style="color:#ccc">Tidak ada catatan</span>'}</div>
+      </div>`);
+    }
+    document.getElementById('mood-history').innerHTML = rows.length ? rows.join('') : '<div style="color:#bbb;font-size:13px;text-align:center;padding:10px 0">Belum ada catatan. Mulai tulis hari ini!</div>';
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  STATISTIK DETAIL
+  // ═══════════════════════════════════════════════════════
+  function renderStatistik() {
+    // Overview
+    let totalDone = 0, totalMax = 0, bestPct = 0, bestDay = '';
+    DAYS.forEach((d,i) => {
+      const done = getDone(i).length;
+      totalDone += done; totalMax += TOTAL;
+      const p = Math.round((done/TOTAL)*100);
+      if (p > bestPct) { bestPct = p; bestDay = d; }
+    });
+    const avgPct = Math.round((totalDone/totalMax)*100);
+    document.getElementById('stat-overview').innerHTML = `
+      <div class="stat-ov-item"><div class="stat-ov-num">${totalDone}</div><div class="stat-ov-lbl">Total tugas selesai minggu ini</div></div>
+      <div class="stat-ov-item"><div class="stat-ov-num">${avgPct}%</div><div class="stat-ov-lbl">Rata-rata progress harian</div></div>
+      <div class="stat-ov-item"><div class="stat-ov-num">${bestPct}%</div><div class="stat-ov-lbl">Hari terbaik: ${bestDay||'—'}</div></div>
+      <div class="stat-ov-item"><div class="stat-ov-num">${localStorage.getItem('pomo-sessions-today')||0}🍅</div><div class="stat-ov-lbl">Pomodoro hari ini</div></div>`;
+
+    // Streak
+    let streak = 0;
+    for (let i = todayIdx; i >= 0; i--) {
+      if (getDone(i).length > 0) streak++; else break;
+    }
+    document.getElementById('stat-streak-num').textContent = streak + '🔥';
+    document.getElementById('stat-streak-sub').textContent = streak === 0 ? 'Ayo mulai streak-mu!' : streak === 1 ? 'Hari pertama, pertahankan!' : `${streak} hari berturut-turut, keren!`;
+
+    // Breakdown per kategori
+    const catCounts = { sholat:0, coding:0, novel:0, lain:0 };
+    const catTotals = { sholat:0, coding:0, novel:0, lain:0 };
+    ITEMS.forEach(item => { catTotals[item.cat]++; });
+    DAYS.forEach((d,i) => {
+      const done = getDone(i);
+      done.forEach(idx => { catCounts[ITEMS[idx].cat]++; });
+    });
+    const catLabels = { sholat:'🕌 Sholat', coding:'💻 Coding', novel:'📖 Novel', lain:'🌿 Lainnya' };
+    const catHtml = Object.keys(catCounts).map(cat => {
+      const total = catTotals[cat] * 7;
+      const done = catCounts[cat];
+      const pct = total > 0 ? Math.round((done/total)*100) : 0;
+      return `<div class="stat-cat-row">
+        <div class="stat-cat-label">${catLabels[cat]}</div>
+        <div class="stat-cat-bar-bg"><div class="stat-cat-bar-fill" style="width:${pct}%;background:${COLORS[cat]}"></div></div>
+        <div class="stat-cat-pct">${pct}%</div>
+      </div>`;
+    }).join('');
+    document.getElementById('stat-cats').innerHTML = catHtml;
+
+    // Mood minggu ini
+    const moodHtml = DAYS.map((d,i) => {
+      const offset = i - todayIdx;
+      const entry = getMood(offset);
+      const emoji = entry && entry.mood ? MOOD_EMOJIS[entry.mood] : '·';
+      return `<div class="mood-week-item"><div class="mood-week-emoji">${emoji}</div><div class="mood-week-day">${d.slice(0,3)}</div></div>`;
+    }).join('');
+    document.getElementById('stat-mood-week').innerHTML = moodHtml;
+
+    // Day grid
+    document.getElementById('stat-day-labels').innerHTML = DAYS.map(d => `<div class="stat-cat-lbl" style="font-size:9px;color:#bbb;text-align:center">${d.slice(0,3)}</div>`).join('');
+    document.getElementById('stat-day-grid').innerHTML = DAYS.map((d,i) => {
+      const done = getDone(i).length;
+      const pct = Math.round((done/TOTAL)*100);
+      const cls = done===0?'':pct>=70?'has-data':'has-data partial';
+      return `<div class="stat-day-cell ${cls}" title="${d}: ${done}/${TOTAL} (${pct}%)">${pct>0?pct+'%':''}</div>`;
+    }).join('');
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════════════════════
+  render();
+  updatePomoDisplay();
+  renderCountdowns();
+  setTimeout(showNotifBanner, 1500);
   </script>
 </body>
 </html>
