@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1a1a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Jadwalku" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+  <title>Jadwal Harianku</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, 'Segoe UI', Arial, sans-serif;
+      background: #f5f5f0;
+      color: #1a1a1a;
+      padding: 20px 16px 40px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 2px; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 18px; }
+
+    /* Notif banner */
+    #notif-banner {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    #notif-banner.show { display: block; }
+    #notif-banner p { font-size: 13px; color: #92400e; margin-bottom: 8px; }
+    #notif-banner button {
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    #notif-banner .skip {
+      background: none;
+      color: #aaa;
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Install banner */
+    #install-banner {
+      background: #f0fdf4;
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    #install-banner.show { display: block; }
+    #install-banner p { font-size: 13px; color: #166534; margin-bottom: 8px; }
+    #install-banner button {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    #install-banner .skip {
+      background: none;
+      color: #aaa;
+      border: 1px solid #e0e0e0;
+    }
+
+    /* Day tabs */
+    .days-wrap {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .day-btn {
+      padding: 7px 13px;
+      border-radius: 20px;
+      border: 1px solid #e0e0e0;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      color: #666;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+
+    .day-btn:hover { border-color: #bbb; }
+    .day-btn.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; }
+
+    .progress-dot {
+      position: absolute;
+      top: -3px; right: -3px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      border: 1.5px solid #f5f5f0;
+      display: none;
+    }
+    .day-btn.has-progress .progress-dot { display: block; }
+
+    .today-badge {
+      display: inline-block;
+      font-size: 10px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-radius: 5px;
+      padding: 1px 5px;
+      margin-left: 4px;
+      font-weight: 600;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .stat {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid #e5e5e5;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .stat-num { font-size: 20px; font-weight: 600; }
+    .stat-lbl { font-size: 11px; color: #888; margin-top: 2px; }
+
+    /* Weekly bars */
+    .week-summary {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+    }
+    .week-title { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .week-bars { display: flex; gap: 6px; align-items: flex-end; height: 52px; }
+    .bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+    .bar-track { width: 100%; background: #f0f0eb; border-radius: 4px; height: 38px; display: flex; align-items: flex-end; overflow: hidden; }
+    .bar-fill { width: 100%; background: #1a1a1a; border-radius: 4px; min-height: 2px; transition: height 0.4s; }
+    .bar-lbl { font-size: 10px; color: #bbb; font-weight: 500; }
+
+    /* Legend */
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .leg-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #666; }
+    .leg-dot { width: 9px; height: 9px; border-radius: 50%; }
+
+    /* Reset buttons */
+    .btn-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+
+    .reset-btn {
+      font-size: 12px; color: #888;
+      background: none; border: 1px solid #e0e0e0;
+      border-radius: 8px; padding: 5px 12px; cursor: pointer;
+    }
+    .reset-btn:hover { background: #f0f0f0; }
+
+    .reset-all-btn {
+      font-size: 12px; color: #e53e3e;
+      background: none; border: 1px solid #fca5a5;
+      border-radius: 8px; padding: 5px 12px; cursor: pointer;
+    }
+    .reset-all-btn:hover { background: #fff5f5; }
+
+    /* Confirm box */
+    .confirm-box {
+      display: none; align-items: center; gap: 8px;
+      background: #fff8f0; border: 1px solid #fcd3a0;
+      border-radius: 10px; padding: 10px 12px;
+      font-size: 12px; color: #92400e;
+      width: 100%; margin-bottom: 10px; flex-wrap: wrap;
+    }
+    .confirm-box.show { display: flex; }
+    .confirm-box span { flex: 1; font-weight: 500; }
+    .confirm-yes { background: #e53e3e; color: #fff; border: none; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+    .confirm-no { background: none; color: #888; border: 1px solid #ddd; border-radius: 6px; padding: 4px 12px; font-size: 12px; cursor: pointer; }
+
+    /* Section label */
+    .section-lbl {
+      font-size: 11px; font-weight: 600; color: #999;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      margin: 14px 0 7px;
+    }
+
+    /* Schedule item */
+    .item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 11px 13px; border-radius: 12px;
+      border: 1px solid #e5e5e5; background: #fff;
+      margin-bottom: 7px; cursor: pointer;
+      transition: border-color 0.15s, opacity 0.2s;
+      user-select: none; -webkit-tap-highlight-color: transparent;
+    }
+    .item:active { background: #f9f9f9; }
+    .item.done { opacity: 0.4; }
+    .item.done .item-title { text-decoration: line-through; color: #aaa; }
+
+    .time-col { min-width: 62px; }
+    .time { font-size: 13px; font-weight: 600; }
+    .dur { font-size: 11px; color: #bbb; margin-top: 1px; }
+
+    .dot { width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .info { flex: 1; }
+    .item-title { font-size: 14px; font-weight: 500; line-height: 1.3; }
+    .item-sub { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.4; }
+
+    .check {
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 1.5px solid #ddd;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 12px; margin-top: 1px;
+      color: #fff; font-weight: 700; transition: all 0.15s;
+    }
+    .item.done .check { background: #22c55e; border-color: #22c55e; }
+
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+      body { background: #111; color: #f0f0f0; }
+      .stat, .item, .week-summary { background: #1e1e1e; border-color: #2a2a2a; }
+      .day-btn { background: #1e1e1e; border-color: #2a2a2a; color: #aaa; }
+      .day-btn:hover { background: #252525; }
+      .day-btn.active { background: #f0f0f0; color: #111; border-color: #f0f0f0; }
+      .progress-dot { border-color: #111; }
+      .bar-track { background: #2a2a2a; }
+      .bar-fill { background: #f0f0f0; }
+      .time, .item-title, .stat-num { color: #f0f0f0; }
+      .check { border-color: #444; }
+      .reset-btn { color: #888; border-color: #2a2a2a; }
+      .reset-btn:hover { background: #222; }
+      .confirm-box { background: #2a1500; border-color: #78350f; color: #fcd3a0; }
+      .today-badge { background: #1e3a5f; color: #93c5fd; }
+      #notif-banner { background: #2a2000; border-color: #78600f; }
+      #notif-banner p { color: #fde68a; }
+      #install-banner { background: #052e16; border-color: #166534; }
+      #install-banner p { color: #86efac; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Jadwal Harianku</h1>
+  <p class="subtitle" id="date-lbl"></p>
+
+  <div id="notif-banner">
+    <p>🔔 Aktifkan notifikasi biar kamu dapat pengingat sholat & coding!</p>
+    <button onclick="requestNotif()">Aktifkan</button>
+    <button class="skip" onclick="dismissNotif()">Nanti</button>
+  </div>
+
+  <div id="install-banner">
+    <p>📱 Install app ini ke layar utama HP kamu!</p>
+    <button id="install-btn" onclick="installApp()">Install</button>
+    <button class="skip" onclick="document.getElementById('install-banner').classList.remove('show')">Nanti</button>
+  </div>
+
+  <div class="days-wrap" id="days"></div>
+
+  <div class="week-summary">
+    <div class="week-title">Progress minggu ini</div>
+    <div class="week-bars" id="week-bars"></div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#534AB7"></div>Sholat</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#0F6E56"></div>Coding</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#D4537E"></div>Novel</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#888780"></div>Lainnya</div>
+  </div>
+
+  <div id="confirm-day" class="confirm-box">
+    <span>Hapus progress hari ini?</span>
+    <button class="confirm-no" onclick="hideConfirm()">Batal</button>
+    <button class="confirm-yes" onclick="doResetDay()">Ya, hapus</button>
+  </div>
+  <div id="confirm-week" class="confirm-box">
+    <span>Hapus progress semua hari?</span>
+    <button class="confirm-no" onclick="hideConfirm()">Batal</button>
+    <button class="confirm-yes" onclick="doResetWeek()">Ya, hapus</button>
+  </div>
+
+  <div class="btn-row">
+    <button class="reset-btn" onclick="showConfirm('day')">↺ Reset hari ini</button>
+    <button class="reset-all-btn" onclick="showConfirm('week')">✕ Reset semua</button>
+  </div>
+
+  <div id="schedule"></div>
+
+  <script>
+    // ── Data jadwal ──────────────────────────────────────────────
+    const SCHEDULE = [
+      { section: 'Pagi' },
+      { time:'07.00', dur:'15 mnt', title:'Bangun & sholat Subuh (qadha)', sub:'Jangan lupa berdoa & bersyukur', cat:'sholat', notif:{h:7,m:0} },
+      { time:'07.15', dur:'30 mnt', title:'Sarapan & bersiap', sub:'Makan dulu biar semangat!', cat:'lain' },
+      { time:'07.45', dur:'15 mnt', title:'Review target hari ini', sub:'Tulis 3 hal yang mau dicapai hari ini', cat:'lain' },
+
+      { section: 'Pagi Produktif' },
+      { time:'08.00', dur:'90 mnt', title:'Sesi coding 1', sub:'Lanjut materi freeCodeCamp / VS Code — fokus tanpa HP', cat:'coding', notif:{h:8,m:0} },
+      { time:'09.30', dur:'15 mnt', title:'Istirahat', sub:'Minum air, stretching ringan', cat:'lain' },
+      { time:'09.45', dur:'45 mnt', title:'Nulis novel — sesi 1', sub:'Target: 300–500 kata. Tulis aja dulu, jangan diedit', cat:'novel', notif:{h:9,m:45} },
+
+      { section: 'Siang' },
+      { time:'10.30', dur:'30 mnt', title:'Bebas / scroll media sosial', sub:'Reward kamu untuk 2.5 jam produktif!', cat:'lain' },
+      { time:'11.00', dur:'60 mnt', title:'Sesi coding 2', sub:'Lanjutkan proyek atau buat sesuatu yang baru', cat:'coding', notif:{h:11,m:0} },
+      { time:'12.00', dur:'15 mnt', title:'Sholat Dzuhur', sub:'Tepat waktu ya!', cat:'sholat', notif:{h:12,m:0} },
+      { time:'12.15', dur:'45 mnt', title:'Makan siang & istirahat', sub:'Waktunya recharge energi', cat:'lain' },
+
+      { section: 'Sore' },
+      { time:'13.00', dur:'60 mnt', title:'Sesi coding 3 / review materi', sub:'Ulangi materi yang masih bingung', cat:'coding', notif:{h:13,m:0} },
+      { time:'14.00', dur:'60 mnt', title:'Nulis novel — sesi 2', sub:'Lanjutkan cerita, target +300 kata lagi', cat:'novel', notif:{h:14,m:0} },
+      { time:'15.00', dur:'15 mnt', title:'Sholat Ashar', sub:'Jangan ditunda!', cat:'sholat', notif:{h:15,m:0} },
+      { time:'15.15', dur:'45 mnt', title:'Waktu bebas / hobi lain', sub:'Dengerin musik, jalan-jalan, atau istirahat', cat:'lain' },
+
+      { section: 'Malam' },
+      { time:'18.00', dur:'15 mnt', title:'Sholat Maghrib', sub:'Waktu yang mustajab untuk berdoa', cat:'sholat', notif:{h:18,m:0} },
+      { time:'18.15', dur:'30 mnt', title:'Makan malam', sub:'', cat:'lain' },
+      { time:'19.00', dur:'15 mnt', title:'Sholat Isya', sub:'', cat:'sholat', notif:{h:19,m:0} },
+      { time:'19.15', dur:'45 mnt', title:'Review & refleksi hari ini', sub:'Apa yang dicapai? Apa yang bisa lebih baik?', cat:'lain' },
+      { time:'20.00', dur:'30 mnt', title:'Nulis novel — sesi malam', sub:'Opsional — kalau masih mood', cat:'novel', notif:{h:20,m:0} },
+      { time:'20.30', dur:'', title:'Istirahat & tidur', sub:'Tidur cukup = produktif besok!', cat:'lain' },
+    ];
+
+    const COLORS = { sholat:'#534AB7', coding:'#0F6E56', novel:'#D4537E', lain:'#888780' };
+    const DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+    const ITEMS = SCHEDULE.filter(s => !s.section);
+    const TOTAL = ITEMS.length;
+
+    const todayJS = new Date().getDay();
+    const todayIdx = todayJS === 0 ? 6 : todayJS - 1;
+    let activeDay = todayIdx;
+
+    // ── Storage ───────────────────────────────────────────────────
+    function getKey(d) { return 'jadwal-v2-day-' + d; }
+    function getDone(d) { try { return JSON.parse(localStorage.getItem(getKey(d)) || '[]'); } catch(e) { return []; } }
+    function saveDone(d, arr) { localStorage.setItem(getKey(d), JSON.stringify(arr)); }
+
+    // ── Notifications ─────────────────────────────────────────────
+    let swReg = null;
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(r => {
+        swReg = r;
+        scheduleNotifications();
+      });
+    }
+
+    function showNotifBanner() {
+      if (Notification.permission === 'default' && localStorage.getItem('notif-dismissed') !== '1') {
+        document.getElementById('notif-banner').classList.add('show');
+      }
+    }
+
+    function requestNotif() {
+      Notification.permission !== 'granted'
+        ? Notification.requestPermission().then(p => {
+            document.getElementById('notif-banner').classList.remove('show');
+            if (p === 'granted') scheduleNotifications();
+          })
+        : document.getElementById('notif-banner').classList.remove('show');
+    }
+
+    function dismissNotif() {
+      localStorage.setItem('notif-dismissed', '1');
+      document.getElementById('notif-banner').classList.remove('show');
+    }
+
+    function scheduleNotifications() {
+      if (Notification.permission !== 'granted' || !swReg) return;
+      const now = new Date();
+      ITEMS.forEach((item, idx) => {
+        if (!item.notif) return;
+        const t = new Date();
+        t.setHours(item.notif.h, item.notif.m, 0, 0);
+        const ms = t - now;
+        if (ms > 0 && ms < 86400000) {
+          setTimeout(() => {
+            if (!swReg) return;
+            swReg.active && swReg.active.postMessage({
+              type: 'SHOW_NOTIF',
+              title: item.title,
+              body: item.sub || 'Waktunya ' + item.title + '!',
+              tag: 'jadwal-' + idx
+            });
+          }, ms);
+        }
+      });
+    }
+
+    // ── PWA Install ───────────────────────────────────────────────
+    let deferredPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      document.getElementById('install-banner').classList.add('show');
+    });
+
+    function installApp() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(() => {
+        deferredPrompt = null;
+        document.getElementById('install-banner').classList.remove('show');
+      });
+    }
+
+    // ── Reset / Confirm ───────────────────────────────────────────
+    function showConfirm(t) { hideConfirm(); document.getElementById('confirm-' + t).classList.add('show'); }
+    function hideConfirm() { ['day','week'].forEach(t => document.getElementById('confirm-' + t).classList.remove('show')); }
+    function doResetDay() { saveDone(activeDay, []); hideConfirm(); render(); }
+    function doResetWeek() { DAYS.forEach((_, i) => saveDone(i, [])); hideConfirm(); render(); }
+
+    function toggle(idx) {
+      let done = getDone(activeDay);
+      const pos = done.indexOf(idx);
+      pos === -1 ? done.push(idx) : done.splice(pos, 1);
+      saveDone(activeDay, done);
+      render();
+    }
+
+    // ── Render ────────────────────────────────────────────────────
+    function render() {
+      const done = getDone(activeDay);
+      const completed = done.length;
+      const pct = Math.round((completed / TOTAL) * 100);
+
+      // Date label
+      const now = new Date();
+      document.getElementById('date-lbl').textContent =
+        now.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      // Day tabs
+      document.getElementById('days').innerHTML = DAYS.map((d, i) => {
+        const hp = getDone(i).length > 0;
+        return `<button class="day-btn${i===activeDay?' active':''}${hp?' has-progress':''}"
+          onclick="activeDay=${i};render()">
+          ${d}${i===todayIdx?'<span class="today-badge">Hari ini</span>':''}
+          <span class="progress-dot"></span>
+        </button>`;
+      }).join('');
+
+      // Weekly bars
+      document.getElementById('week-bars').innerHTML = DAYS.map((d, i) => {
+        const p = Math.round((getDone(i).length / TOTAL) * 100);
+        const h = Math.max(2, Math.round(p * 0.38));
+        return `<div class="bar-wrap">
+          <div class="bar-track"><div class="bar-fill" style="height:${h}px"></div></div>
+          <div class="bar-lbl">${d.substring(0,3)}</div>
+        </div>`;
+      }).join('');
+
+      // Stats
+      document.getElementById('stats').innerHTML = `
+        <div class="stat"><div class="stat-num">${completed}/${TOTAL}</div><div class="stat-lbl">Selesai</div></div>
+        <div class="stat"><div class="stat-num">${pct}%</div><div class="stat-lbl">Progress</div></div>
+        <div class="stat"><div class="stat-num">${TOTAL - completed}</div><div class="stat-lbl">Tersisa</div></div>`;
+
+      // Schedule
+      let html = '', idx = 0;
+      SCHEDULE.forEach(s => {
+        if (s.section) { html += `<div class="section-lbl">${s.section}</div>`; return; }
+        const i = idx, isDone = done.includes(i);
+        html += `<div class="item${isDone?' done':''}" onclick="toggle(${i})">
+          <div class="time-col">
+            <div class="time">${s.time}</div>
+            ${s.dur ? `<div class="dur">${s.dur}</div>` : ''}
+          </div>
+          <div class="dot" style="background:${COLORS[s.cat]}"></div>
+          <div class="info">
+            <div class="item-title">${s.title}</div>
+            ${s.sub ? `<div class="item-sub">${s.sub}</div>` : ''}
+          </div>
+          <div class="check">${isDone ? '✓' : ''}</div>
+        </div>`;
+        idx++;
+      });
+      document.getElementById('schedule').innerHTML = html;
+    }
+
+    // ── Init ──────────────────────────────────────────────────────
+    render();
+    setTimeout(showNotifBanner, 1500);
+  </script>
+</body>
+</html>
